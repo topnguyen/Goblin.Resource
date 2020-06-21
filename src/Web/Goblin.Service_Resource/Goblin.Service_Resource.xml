@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Goblin.Service_Resource</name>
+    </assembly>
+    <members>
+        <member name="M:Goblin.Service_Resource.Controllers.TestController.Index(Goblin.Service_Resource.Controllers.TestController.TestModel)">
+            <summary>
+                Test Model
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

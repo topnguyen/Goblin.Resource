@@ -1,0 +1,3 @@
+[submodule "Goblin.Core"]
+	path = Goblin.Core
+	url = https://github.com/topnguyen/Goblin.Core
