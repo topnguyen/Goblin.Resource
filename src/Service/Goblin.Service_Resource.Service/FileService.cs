@@ -146,6 +146,16 @@ namespace Goblin.Service_Resource.Service
 
             if (imageInfo != null)
             {
+                // Image Skeleton
+
+                var imageSkeletonBytes = ResizeAndCompressImage(fileBytes,
+                    true,
+                    SystemSetting.Current.ImageSkeletonMaxWidthPx, 
+                    SystemSetting.Current.ImageSkeletonMaxHeightPx,
+                    true);
+
+                SaveFile(imageSkeletonBytes, model.Folder, fileName, "-s", fileEntity.Extension);
+                
                 // Image Thumbnail
 
                 var imageThumbnailBytes = ResizeAndCompressImage(fileBytes,

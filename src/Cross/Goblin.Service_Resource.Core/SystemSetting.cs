@@ -8,6 +8,10 @@ namespace Goblin.Service_Resource.Core
         
         public int ImageMaxHeightPx { get; set; }
         
+        public int ImageSkeletonMaxWidthPx { get; set; }
+        
+        public int ImageSkeletonMaxHeightPx { get; set; }
+        
         public int ImageThumbnailMaxWidthPx { get; set; }
         
         public int ImageThumbnailMaxHeightPx { get; set; }
