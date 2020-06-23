@@ -41,12 +41,15 @@ namespace Goblin.Service_Resource.Service
                 model.Folder = SystemSetting.Current.DefaultFolderName;
             }
 
-            var folders = model.Folder
-                .Split("/")
-                .Select(x => x.Trim().ToLowerInvariant())
-                .ToList();
+            if (!string.IsNullOrWhiteSpace(model.Folder))
+            {
+                var folders = model.Folder
+                    .Split("/")
+                    .Select(x => x.Trim().ToLowerInvariant())
+                    .ToList();
 
-            model.Folder = string.Join("/", folders);
+                model.Folder = string.Join("/", folders);   
+            }
 
             model.Name = model.Name?.Trim()
                 .Replace("-s", "~s")
@@ -195,7 +198,7 @@ namespace Goblin.Service_Resource.Service
         /// <returns></returns>
         private static string SaveFile(byte[] fileBytes, string folderName, string fileName, string fileNamePostfix, string fileExtension)
         {
-            var fileRelativePath = $"{folderName}/{fileName}{fileNamePostfix}{fileExtension}";
+            var fileRelativePath = $"{folderName}/{fileName}{fileNamePostfix}{fileExtension}".Trim('/');
 
             return SaveFile(fileBytes, fileRelativePath);
         }
