@@ -48,7 +48,7 @@ namespace Goblin.Service_Resource.Service
                     .Select(x => x.Trim().ToLowerInvariant())
                     .ToList();
 
-                model.Folder = string.Join("/", folders);   
+                model.Folder = string.Join("/", folders);
             }
 
             model.Name = model.Name?.Trim()
@@ -81,13 +81,18 @@ namespace Goblin.Service_Resource.Service
                 model.ImageMaxWidthPx = SystemSetting.Current.ImageMaxWidthPx;
             }
 
-
-            // Map to Entity
-
-            var fileEntity = model.MapTo<FileEntity>();
-
             // File Checksum
-            fileEntity.Hash = SecurityHelper.EncryptSha256(model.ContentBase64);
+            var fileHash = SecurityHelper.EncryptSha256(model.ContentBase64);
+
+            var fileEntity = _fileRepo.Get(x => x.Hash == fileHash).FirstOrDefault();
+
+            if (fileEntity != null)
+            {
+                return fileEntity.MapTo<FileModel>();
+            }
+            
+            // Map to Entity
+            fileEntity = model.MapTo<FileEntity>();
 
             var fileBytes = Convert.FromBase64String(model.ContentBase64);
 
@@ -110,10 +115,10 @@ namespace Goblin.Service_Resource.Service
             else
             {
                 // Document File
-                
+
                 fileEntity.IsImage = false;
                 fileEntity.IsCompressedImage = false;
-                
+
                 fileEntity.Extension = Path.GetExtension(fileEntity.Name);
                 fileEntity.MimeType = string.IsNullOrWhiteSpace(fileEntity.Extension)
                     ? "application/octet-stream"
@@ -150,17 +155,17 @@ namespace Goblin.Service_Resource.Service
 
                 var imageSkeletonBytes = ResizeAndCompressImage(fileBytes,
                     true,
-                    SystemSetting.Current.ImageSkeletonMaxWidthPx, 
+                    SystemSetting.Current.ImageSkeletonMaxWidthPx,
                     SystemSetting.Current.ImageSkeletonMaxHeightPx,
                     true);
 
                 SaveFile(imageSkeletonBytes, model.Folder, fileName, "-s", fileEntity.Extension);
-                
+
                 // Image Thumbnail
 
                 var imageThumbnailBytes = ResizeAndCompressImage(fileBytes,
                     true,
-                    SystemSetting.Current.ImageThumbnailMaxWidthPx, 
+                    SystemSetting.Current.ImageThumbnailMaxWidthPx,
                     SystemSetting.Current.ImageThumbnailMaxHeightPx,
                     true);
 
@@ -169,22 +174,22 @@ namespace Goblin.Service_Resource.Service
                 // Image
 
                 var isNeedResizeImage = model.ImageMaxHeightPx < fileEntity.ImageHeightPx ||
-                                   model.ImageMaxWidthPx < fileEntity.ImageWidthPx;
-                
+                                        model.ImageMaxWidthPx < fileEntity.ImageWidthPx;
+
                 fileBytes = ResizeAndCompressImage(fileBytes,
                     isNeedResizeImage,
                     model.ImageMaxWidthPx.Value,
                     model.ImageMaxHeightPx.Value,
                     model.IsEnableCompressImage);
-                
+
                 fileEntity.Slug = SaveFile(fileBytes, model.Folder, fileName, string.Empty, fileEntity.Extension);
-                
+
                 fileEntity.ContentLength = fileBytes.Length;
             }
             else
             {
                 fileEntity.Slug = SaveFile(fileBytes, model.Folder, fileName, string.Empty, fileEntity.Extension);
-                
+
                 fileEntity.ContentLength = fileBytes.Length;
             }
 
@@ -206,7 +211,8 @@ namespace Goblin.Service_Resource.Service
         /// <param name="fileNamePostfix"></param>
         /// <param name="fileExtension"></param>
         /// <returns></returns>
-        private static string SaveFile(byte[] fileBytes, string folderName, string fileName, string fileNamePostfix, string fileExtension)
+        private static string SaveFile(byte[] fileBytes, string folderName, string fileName, string fileNamePostfix,
+            string fileExtension)
         {
             var fileRelativePath = $"{folderName}/{fileName}{fileNamePostfix}{fileExtension}".Trim('/');
 
@@ -222,35 +228,29 @@ namespace Goblin.Service_Resource.Service
         {
             fileRelativePath = PathHelper.CorrectPathSeparatorChar(fileRelativePath);
 
-            fileRelativePath = Path.Combine(SystemSetting.Current.ResourceFolderPath, fileRelativePath);
-
-            var fileAbsolutePath = Path.Combine(Directory.GetCurrentDirectory(), fileRelativePath);
+            var fileAbsolutePath = Path.Combine(Directory.GetCurrentDirectory(),
+                SystemSetting.Current.ResourceFolderPath,
+                fileRelativePath);
 
             var folderAbsolutePath = Path.GetDirectoryName(fileAbsolutePath);
 
             DirectoryHelper.CreateIfNotExist(folderAbsolutePath);
-            
+
             File.WriteAllBytes(fileAbsolutePath, fileBytes);
 
-            var fileSlug = fileRelativePath
-                .Replace(Path.DirectorySeparatorChar, '/');
-
-            if (fileSlug.StartsWith(SystemSetting.Current.ResourceFolderPath))
-            {
-                fileSlug = fileSlug.Replace(SystemSetting.Current.ResourceFolderPath, string.Empty);
-            }
+            var fileSlug = fileRelativePath.Replace(Path.DirectorySeparatorChar, '/');
 
             return fileSlug;
         }
 
         private static byte[] ResizeAndCompressImage(byte[] imageFileBytes,
             bool isResize,
-            int maxWidthPx, 
+            int maxWidthPx,
             int maxHeightPx,
             bool isCompress)
         {
             var newImageFileBytes = imageFileBytes;
-            
+
             if (isResize)
             {
                 newImageFileBytes = ImageResizeHelper.Resize(imageFileBytes, maxWidthPx, maxHeightPx);

@@ -80,9 +80,6 @@ namespace Goblin.Service_Resource.Repository.Migrations
                     b.Property<string>("Slug")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StorageFullPath")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedTime");

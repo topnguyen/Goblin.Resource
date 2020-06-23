@@ -3,6 +3,7 @@ namespace Goblin.Service_Resource.Core.Models
     public class FileModel
     {
         public string Slug { get; set; }
+        
 
         public string Folder { get; set; }
 

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Goblin.Service_Resource.Repository.Migrations
 {
     [DbContext(typeof(Service_Resource_DbContext))]
-    [Migration("20200623093532_UpdateFileTable")]
-    partial class UpdateFileTable
+    [Migration("20200623122327_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,9 +80,6 @@ namespace Goblin.Service_Resource.Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Slug")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StorageFullPath")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

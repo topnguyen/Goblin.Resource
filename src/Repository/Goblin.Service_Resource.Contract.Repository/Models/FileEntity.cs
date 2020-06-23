@@ -3,6 +3,7 @@ namespace Goblin.Service_Resource.Contract.Repository.Models
     public class FileEntity : GoblinEntity
     {
         public string Slug { get; set; }
+        
 
         public string Folder { get; set; }
 
@@ -29,9 +30,5 @@ namespace Goblin.Service_Resource.Contract.Repository.Models
         public int ImageWidthPx { get; set; } = -1;
 
         public int ImageHeightPx { get; set; } = -1;
-        
-        // Storage Information
-
-        public string StorageFullPath { get; set; }
     }
 }
