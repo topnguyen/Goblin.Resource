@@ -4,14 +4,16 @@ using Goblin.Service_Resource.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Goblin.Service_Resource.Repository.Migrations
 {
     [DbContext(typeof(Service_Resource_DbContext))]
-    partial class Service_Resource_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20200623093532_UpdateFileTable")]
+    partial class UpdateFileTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

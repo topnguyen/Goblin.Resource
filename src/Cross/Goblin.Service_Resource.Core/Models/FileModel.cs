@@ -1,6 +1,6 @@
-namespace Goblin.Service_Resource.Contract.Repository.Models
+namespace Goblin.Service_Resource.Core.Models
 {
-    public class FileEntity : GoblinEntity
+    public class FileModel
     {
         public string Slug { get; set; }
 
@@ -29,9 +29,5 @@ namespace Goblin.Service_Resource.Contract.Repository.Models
         public int ImageWidthPx { get; set; } = -1;
 
         public int ImageHeightPx { get; set; } = -1;
-        
-        // Storage Information
-
-        public string StorageFullPath { get; set; }
     }
 }

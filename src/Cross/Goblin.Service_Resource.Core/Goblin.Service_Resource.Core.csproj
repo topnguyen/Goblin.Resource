@@ -18,4 +18,8 @@
 		<!-- Core -->
         <ProjectReference Include="..\Goblin.Service_Resource.Share\Goblin.Service_Resource.Share.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="runtime.osx.10.10-x64.CoreCompat.System.Drawing" Version="5.8.64" />
+    </ItemGroup>
 </Project>

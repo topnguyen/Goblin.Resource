@@ -4,11 +4,12 @@
         <name>Goblin.Service_Resource</name>
     </assembly>
     <members>
-        <member name="M:Goblin.Service_Resource.Controllers.TestController.Index(Goblin.Service_Resource.Controllers.TestController.TestModel)">
+        <member name="M:Goblin.Service_Resource.Controllers.FileController.Upload(Goblin.Service_Resource.Core.Models.UploadFileModel,System.Threading.CancellationToken)">
             <summary>
-                Test Model
+                Upload File
             </summary>
-            <param name="content"></param>
+            <param name="model"></param>
+            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
     </members>

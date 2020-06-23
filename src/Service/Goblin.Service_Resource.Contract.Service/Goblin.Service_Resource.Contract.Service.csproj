@@ -11,6 +11,6 @@
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     </PropertyGroup>
     <ItemGroup>
-        <ProjectReference Include="..\..\Cross\Goblin.Service_Resource.Core\Goblin.Service_Resource.Core.csproj"/>
+        <ProjectReference Include="..\..\Cross\Goblin.Service_Resource.Core\Goblin.Service_Resource.Core.csproj" />
     </ItemGroup>
 </Project>
