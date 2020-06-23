@@ -222,7 +222,13 @@ namespace Goblin.Service_Resource.Service
             
             File.WriteAllBytes(fileAbsolutePath, fileBytes);
 
-            var fileSlug = fileRelativePath.Replace(Path.DirectorySeparatorChar, '/');
+            var fileSlug = fileRelativePath
+                .Replace(Path.DirectorySeparatorChar, '/');
+
+            if (fileSlug.StartsWith(SystemSetting.Current.ResourceFolderPath))
+            {
+                fileSlug = fileSlug.Replace(SystemSetting.Current.ResourceFolderPath, string.Empty);
+            }
 
             return fileSlug;
         }

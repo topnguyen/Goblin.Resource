@@ -15,7 +15,7 @@
         <AddRazorSupportForMvc>false</AddRazorSupportForMvc>
 
         <!-- Very Important to enable Razor Recompile Feature, turn is to false cannot get Views.dll in build folder -->
-        <EnableDefaultContentItems>false</EnableDefaultContentItems>
+        <EnableDefaultContentItems>true</EnableDefaultContentItems>
         
         <!-- Mvc Razor Compile -->
         <RazorCompileOnPublish>false</RazorCompileOnPublish>
@@ -37,7 +37,7 @@
     </PropertyGroup>
     <!-- Copy to Output -->
     <ItemGroup>
-        <Content Include="Goblin.Service_Resource.xml;appsettings.json">
+        <Content Include="Goblin.Service_Resource.xml">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
