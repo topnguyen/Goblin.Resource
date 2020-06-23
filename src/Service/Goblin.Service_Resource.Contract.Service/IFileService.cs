@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Goblin.Service_Resource.Core.Models;
+using Goblin.Service_Resource.Share.Models;
 
 namespace Goblin.Service_Resource.Contract.Service
 {

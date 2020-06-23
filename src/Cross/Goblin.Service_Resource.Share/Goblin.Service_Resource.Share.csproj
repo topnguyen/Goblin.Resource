@@ -23,8 +23,9 @@
 		<PackageOutputPath>..\..\..\nuget</PackageOutputPath>
 		<NuspecFile>..\..\..\nuget\Goblin.Service_Resource.nuspec</NuspecFile>
 	</PropertyGroup>
+	
 	<ItemGroup>
-	  <Folder Include="Models" />
+	  <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
 	</ItemGroup>
 
 </Project>

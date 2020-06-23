@@ -11,7 +11,7 @@ using Elect.Mapper.AutoMapper.ObjUtils;
 using Elect.Web.StringUtils;
 using Goblin.Service_Resource.Contract.Repository.Models;
 using Goblin.Service_Resource.Core;
-using Goblin.Service_Resource.Core.Models;
+using Goblin.Service_Resource.Share.Models;
 
 namespace Goblin.Service_Resource.Service
 {
@@ -57,37 +57,12 @@ namespace Goblin.Service_Resource.Service
 
             var fileName = FileServiceHelper.GenerateId();
 
-            if (!string.IsNullOrWhiteSpace(fileEntity.Name))
-            {
-                fileName += $"-{fileEntity.Name.ToFriendlySlug()}";
-            }
-
             cancellationToken.ThrowIfCancellationRequested();
 
             // Save Files
 
             if (imageInfo != null)
             {
-                // Image Skeleton
-
-                var imageSkeletonBytes = FileServiceHelper.ResizeAndCompressImage(fileBytes,
-                    true,
-                    SystemSetting.Current.ImageSkeletonMaxWidthPx,
-                    SystemSetting.Current.ImageSkeletonMaxHeightPx,
-                    true);
-
-                FileServiceHelper.SaveFile(imageSkeletonBytes, model.Folder, fileName, "-s", fileEntity.Extension);
-
-                // Image Thumbnail
-
-                var imageThumbnailBytes = FileServiceHelper.ResizeAndCompressImage(fileBytes,
-                    true,
-                    SystemSetting.Current.ImageThumbnailMaxWidthPx,
-                    SystemSetting.Current.ImageThumbnailMaxHeightPx,
-                    true);
-
-                FileServiceHelper.SaveFile(imageThumbnailBytes, model.Folder, fileName, "-t", fileEntity.Extension);
-                
                 // Main Image
 
                 var isNeedResizeImage = model.ImageMaxHeightPx < fileEntity.ImageHeightPx ||
@@ -100,14 +75,56 @@ namespace Goblin.Service_Resource.Service
                     model.IsEnableCompressImage);
 
                 fileEntity.IsCompressedImage = true;
+
+                // Refill information after resize and compress
+
+                if (isNeedResizeImage || model.IsEnableCompressImage)
+                {
+                    var newImageInfo = ImageHelper.GetImageInfo(fileBytes);
+                    FileServiceHelper.FillInformation(newImageInfo, fileEntity);
+                }
+                
+                fileName += $"-i-{fileEntity.ImageDominantHexColor}-w{fileEntity.ImageWidthPx}-h{fileEntity.ImageHeightPx}-{fileEntity.Name.ToFriendlySlug()}";
+
+                // Save File
+                
+                fileEntity.Slug = FileServiceHelper.SaveFile(fileBytes, model.Folder, fileName, string.Empty, fileEntity.Extension);
+
+                fileEntity.ContentLength = fileBytes.Length;
+                
+                // --------------------------
+                //    Save More Image Size
+                // --------------------------
+
+                // Image Skeleton
+
+                var imageSkeletonBytes = FileServiceHelper.ResizeAndCompressImage(fileBytes,
+                    true,
+                    SystemSetting.Current.ImageSkeletonMaxWidthPx,
+                    SystemSetting.Current.ImageSkeletonMaxHeightPx,
+                    true);
+                
+                FileServiceHelper.SaveFile(imageSkeletonBytes, model.Folder, fileName, "-s", fileEntity.Extension);
+
+                // Image Thumbnail
+
+                var imageThumbnailBytes = FileServiceHelper.ResizeAndCompressImage(fileBytes,
+                    true,
+                    SystemSetting.Current.ImageThumbnailMaxWidthPx,
+                    SystemSetting.Current.ImageThumbnailMaxHeightPx,
+                    true);
+
+                FileServiceHelper.SaveFile(imageThumbnailBytes, model.Folder, fileName, "-t", fileEntity.Extension);
+            }
+            else
+            {
+                fileName += $"-f-{fileEntity.Name.ToFriendlySlug()}";
+                
+                fileEntity.Slug = FileServiceHelper.SaveFile(fileBytes, model.Folder, fileName, string.Empty, fileEntity.Extension);
+
+                fileEntity.ContentLength = fileBytes.Length;
             }
             
-            // Save file, the file path will be slug
-            
-            fileEntity.Slug = FileServiceHelper.SaveFile(fileBytes, model.Folder, fileName, string.Empty, fileEntity.Extension);
-
-            fileEntity.ContentLength = fileBytes.Length;
-
             _fileRepo.Add(fileEntity);
 
             await UnitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(true);

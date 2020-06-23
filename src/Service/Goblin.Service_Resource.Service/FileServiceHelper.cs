@@ -12,7 +12,7 @@ using Elect.Data.IO.ImageUtils.ResizeUtils;
 using Elect.Web.StringUtils;
 using Goblin.Service_Resource.Contract.Repository.Models;
 using Goblin.Service_Resource.Core;
-using Goblin.Service_Resource.Core.Models;
+using Goblin.Service_Resource.Share.Models;
 
 namespace Goblin.Service_Resource.Service
 {
@@ -78,6 +78,17 @@ namespace Goblin.Service_Resource.Service
         /// <param name="fileEntity"></param>
         public static void FillInformation(ImageModel imageInfo, FileEntity fileEntity)
         {
+            fileEntity.IsImage = false;
+            
+            fileEntity.IsCompressedImage = false;
+
+            fileEntity.Extension = Path.GetExtension(fileEntity.Name);
+
+            fileEntity.MimeType =
+                string.IsNullOrWhiteSpace(fileEntity.Extension)
+                    ? "application/octet-stream"
+                    : MimeTypeHelper.GetMimeType(fileEntity.Extension);
+            
             if (imageInfo != null)
             {
                 // Image File
@@ -85,30 +96,28 @@ namespace Goblin.Service_Resource.Service
                 fileEntity.IsImage = true;
 
                 fileEntity.ImageDominantHexColor = imageInfo.DominantHexColor;
+                
                 fileEntity.ImageWidthPx = imageInfo.WidthPx;
+                
                 fileEntity.ImageHeightPx = imageInfo.HeightPx;
 
                 fileEntity.MimeType = imageInfo.MimeType;
+                
                 fileEntity.Extension = imageInfo.Extension;
             }
-            else
+
+            // Handle file name
+
+            if (string.IsNullOrWhiteSpace(fileEntity.Name))
             {
-                // Document File
+                fileEntity.Name = FileHelper.MakeValidFileName(fileEntity.Name);
+                
+                if (fileEntity.Name.EndsWith(fileEntity.Extension))
+                {
+                    // Get File Name Only
 
-                fileEntity.IsImage = false;
-                fileEntity.IsCompressedImage = false;
-
-                fileEntity.Extension = Path.GetExtension(fileEntity.Name);
-                fileEntity.MimeType = string.IsNullOrWhiteSpace(fileEntity.Extension)
-                    ? "application/octet-stream"
-                    : MimeTypeHelper.GetMimeType(fileEntity.Extension);
-            }
-            
-            if (fileEntity.Name?.EndsWith(fileEntity.Extension) == true)
-            {
-                // Get File Name Only
-
-                fileEntity.Name = fileEntity.Name.Substring(0, fileEntity.Name.Length - fileEntity.Extension.Length);
+                    fileEntity.Name = fileEntity.Name.Substring(0, fileEntity.Name.Length - fileEntity.Extension.Length);
+                }
             }
         }
 
@@ -117,6 +126,22 @@ namespace Goblin.Service_Resource.Service
             var slugId = IdHelper.ToString(ulong.Parse(DateTime.UtcNow.Ticks.ToString())).ToFriendlySlug();
 
             return slugId;
+        }
+        
+        public static string GenerateFileName(string originalFileName, ImageModel imageModel)
+        {
+            var fileName = GenerateId();
+
+            if (imageModel != null)
+            {
+                fileName += $"-i-c{imageModel.DominantHexColor}-w{imageModel}";
+            }
+            else
+            {
+                fileName += "-f-c0-w0-h0";
+            }
+
+            return fileName;
         }
         
         /// <summary>

@@ -4,5 +4,17 @@
         <name>Goblin.Service_Resource.Share</name>
     </assembly>
     <members>
+        <member name="F:Goblin.Service_Resource.Share.Endpoints.UploadFile">
+            <summary>
+                Upload file endpoint <br />
+                HTTP Method: PUT
+            </summary>
+        </member>
+        <member name="P:Goblin.Service_Resource.Share.Models.UploadFileModel.Folder">
+            <summary>
+                Can pass multiple folder by "/" <br />
+                E.g Identity/Avatar
+            </summary>
+        </member>
     </members>
 </doc>

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Goblin.Service_Resource.Core.Models
+namespace Goblin.Service_Resource.Share.Models
 {
     public class UploadFileModel
     {

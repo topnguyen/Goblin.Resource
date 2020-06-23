@@ -2,8 +2,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elect.Web.Swagger.Attributes;
 using Goblin.Service_Resource.Contract.Service;
-using Goblin.Service_Resource.Core.Models;
+using Goblin.Service_Resource.Share;
+using Goblin.Service_Resource.Share.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Goblin.Service_Resource.Controllers
 {
@@ -19,12 +22,24 @@ namespace Goblin.Service_Resource.Controllers
         /// <summary>
         ///     Upload File
         /// </summary>
+        /// <remarks>
+        ///     <b>Slug Format for File</b>: {id}-f-{file name}.{extension} <br />
+        ///     Example: cngxhiuqkkq-f-sample-excel.xlsx <br />
+        ///     <br />
+        ///     <b>Slug Format for Image</b>: {id}-i-{hex color}-{width in px}-{height in px}-{file name}.{extension} <br />
+        ///     Example: cngxhiuqkkq-i-#2B181B-w288-h163-sample-image.png <br />
+        ///     <br />
+        ///     <b>Image Slug</b><br />
+        ///     "{image slug}-s" to access Skeleton/Small 60x60 image <br />
+        ///     "{image slug}-t" to access Thumbnail 600x600 image
+        /// </remarks>
         /// <param name="model"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [ApiDocGroup("File")]
         [HttpPost]
-        [Route("/files")]
+        [Route(Endpoints.UploadFile)]
+        [SwaggerResponse(StatusCodes.Status201Created, "File Saved", typeof(FileModel))]
         public async Task<IActionResult> Upload([FromBody] UploadFileModel model, CancellationToken cancellationToken = default)
         {
             var fileModel = await _fileService.SaveAsync(model, cancellationToken);

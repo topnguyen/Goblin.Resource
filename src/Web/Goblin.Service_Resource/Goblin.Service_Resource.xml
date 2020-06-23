@@ -4,10 +4,21 @@
         <name>Goblin.Service_Resource</name>
     </assembly>
     <members>
-        <member name="M:Goblin.Service_Resource.Controllers.FileController.Upload(Goblin.Service_Resource.Core.Models.UploadFileModel,System.Threading.CancellationToken)">
+        <member name="M:Goblin.Service_Resource.Controllers.FileController.Upload(Goblin.Service_Resource.Share.Models.UploadFileModel,System.Threading.CancellationToken)">
             <summary>
                 Upload File
             </summary>
+            <remarks>
+                <b>Slug Format for File</b>: {id}-f-{file name}.{extension} <br />
+                Example: cngxhiuqkkq-f-sample-excel.xlsx <br />
+                <br />
+                <b>Slug Format for Image</b>: {id}-i-{hex color}-{width in px}-{height in px}-{file name}.{extension} <br />
+                Example: cngxhiuqkkq-i-#2B181B-w288-h163-sample-image.png <br />
+                <br />
+                <b>Image Slug</b><br />
+                "{image slug}-s" to access Skeleton/Small 60x60 image <br />
+                "{image slug}-t" to access Thumbnail 600x600 image
+            </remarks>
             <param name="model"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
