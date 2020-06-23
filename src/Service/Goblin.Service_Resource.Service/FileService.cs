@@ -94,6 +94,8 @@ namespace Goblin.Service_Resource.Service
             // Map to Entity
             fileEntity = model.MapTo<FileEntity>();
 
+            fileEntity.Hash = fileHash;
+            
             var fileBytes = Convert.FromBase64String(model.ContentBase64);
 
             var imageInfo = ImageHelper.GetImageInfo(fileBytes);

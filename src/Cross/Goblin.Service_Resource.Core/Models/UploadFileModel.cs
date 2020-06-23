@@ -20,5 +20,7 @@ namespace Goblin.Service_Resource.Core.Models
         public int? ImageMaxWidthPx { get; set; }
 
         public int? ImageMaxHeightPx { get; set; }
+
+        public long? CreatedBy { get; set; }
     }
 }
