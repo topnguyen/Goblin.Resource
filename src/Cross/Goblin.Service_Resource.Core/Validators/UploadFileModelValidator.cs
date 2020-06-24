@@ -4,7 +4,7 @@ using Goblin.Service_Resource.Share.Models;
 
 namespace Goblin.Service_Resource.Core.Validators
 {
-    public class UploadFileModelValidator : AbstractValidator<UploadFileModel>
+    public class UploadFileModelValidator : AbstractValidator<GoblinResourceUploadFileModel>
     {
         public UploadFileModelValidator()
         {

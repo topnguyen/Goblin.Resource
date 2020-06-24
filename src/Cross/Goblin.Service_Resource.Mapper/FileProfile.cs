@@ -9,10 +9,10 @@ namespace Goblin.Service_Resource.Mapper
     {
         public FileProfile()
         {
-            CreateMap<UploadFileModel, FileEntity>()
+            CreateMap<GoblinResourceUploadFileModel, FileEntity>()
                 .IgnoreAllNonExisting();
             
-            CreateMap<FileEntity, FileModel>()
+            CreateMap<FileEntity, GoblinResourceFileModel>()
                 .IgnoreAllNonExisting();
         }
     }

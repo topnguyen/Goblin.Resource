@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Goblin.Service_Resource.Share.Models
 {
-    public class UploadFileModel
+    public class GoblinResourceUploadFileModel
     {
         public string Name { get; set; }
 

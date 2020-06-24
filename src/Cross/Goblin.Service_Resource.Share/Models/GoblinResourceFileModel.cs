@@ -1,6 +1,6 @@
 namespace Goblin.Service_Resource.Share.Models
 {
-    public class FileModel
+    public class GoblinResourceFileModel
     {
         public string Slug { get; set; }
         

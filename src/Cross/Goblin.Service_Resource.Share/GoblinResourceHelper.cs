@@ -8,19 +8,19 @@ using Goblin.Service_Resource.Share.Models;
 
 namespace Goblin.Service_Resource.Share
 {
-    public static class Goblin_Service_Resource_Helper
+    public static class GoblinResourceHelper
     {
         public static string Domain { get; set; } = string.Empty;
 
-        public static async Task<FileModel> UploadAsync(UploadFileModel model,
+        public static async Task<GoblinResourceFileModel> UploadAsync(GoblinResourceUploadFileModel model,
             CancellationToken cancellationToken = default)
         {
             try
             {
                 var fileModel = await Domain
-                    .AppendPathSegment(Endpoints.UploadFile)
+                    .AppendPathSegment(GoblinResourceEndpoints.UploadFile)
                     .PostJsonAsync(model, cancellationToken: cancellationToken)
-                    .ReceiveJson<FileModel>()
+                    .ReceiveJson<GoblinResourceFileModel>()
                     .ConfigureAwait(true);
 
                 return fileModel;
@@ -42,12 +42,12 @@ namespace Goblin.Service_Resource.Share
             }
         }
 
-        public static async Task<FileModel> GetAsync(string slug, CancellationToken cancellationToken = default)
+        public static async Task<GoblinResourceFileModel> GetAsync(string slug, CancellationToken cancellationToken = default)
         {
             var fileModel = await Domain
-                .AppendPathSegment(Endpoints.GetFile)
+                .AppendPathSegment(GoblinResourceEndpoints.GetFile)
                 .SetQueryParam("slug", slug)
-                .GetJsonAsync<FileModel>(cancellationToken: cancellationToken)
+                .GetJsonAsync<GoblinResourceFileModel>(cancellationToken: cancellationToken)
                 .ConfigureAwait(true);
 
             return fileModel;
@@ -56,7 +56,7 @@ namespace Goblin.Service_Resource.Share
         public static async Task DeleteAsync(string slug, CancellationToken cancellationToken = default)
         {
             await Domain
-                .AppendPathSegment(Endpoints.DeleteFile)
+                .AppendPathSegment(GoblinResourceEndpoints.DeleteFile)
                 .SetQueryParam("slug", slug)
                 .DeleteAsync(cancellationToken)
                 .ConfigureAwait(true);

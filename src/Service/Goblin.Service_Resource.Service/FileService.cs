@@ -29,7 +29,7 @@ namespace Goblin.Service_Resource.Service
             _fileRepo = fileRepo;
         }
 
-        public async Task<FileModel> SaveAsync(UploadFileModel model, CancellationToken cancellationToken = default)
+        public async Task<GoblinResourceFileModel> SaveAsync(GoblinResourceUploadFileModel model, CancellationToken cancellationToken = default)
         {
 
             FileServiceHelper.Correct(model);
@@ -44,7 +44,7 @@ namespace Goblin.Service_Resource.Service
             
             if (fileEntity != null)
             {
-                return fileEntity.MapTo<FileModel>();
+                return fileEntity.MapTo<GoblinResourceFileModel>();
             }
             
             fileEntity = model.MapTo<FileEntity>();
@@ -135,12 +135,12 @@ namespace Goblin.Service_Resource.Service
 
             // Response
             
-            var fileModel = fileEntity.MapTo<FileModel>();
+            var fileModel = fileEntity.MapTo<GoblinResourceFileModel>();
 
             return fileModel;
         }
 
-        public async Task<FileModel> GetAsync(string slug, CancellationToken cancellationToken = default)
+        public async Task<GoblinResourceFileModel> GetAsync(string slug, CancellationToken cancellationToken = default)
         {
             slug = slug?.Trim().ToLowerInvariant();
 
@@ -152,7 +152,7 @@ namespace Goblin.Service_Resource.Service
             var fileModel =
                 await _fileRepo
                     .Get(x => x.Slug == slug)
-                    .QueryTo<FileModel>()
+                    .QueryTo<GoblinResourceFileModel>()
                     .FirstOrDefaultAsync(cancellationToken: cancellationToken)
                     .ConfigureAwait(true);
 

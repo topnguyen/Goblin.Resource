@@ -23,7 +23,7 @@ namespace Goblin.Service_Resource.Service
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static void Correct(UploadFileModel model)
+        public static void Correct(GoblinResourceUploadFileModel model)
         {
             if (string.IsNullOrWhiteSpace(model.Folder))
             {

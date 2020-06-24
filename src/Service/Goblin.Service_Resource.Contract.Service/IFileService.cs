@@ -6,9 +6,9 @@ namespace Goblin.Service_Resource.Contract.Service
 {
     public interface IFileService
     {
-        Task<FileModel> SaveAsync(UploadFileModel model, CancellationToken cancellationToken = default);
+        Task<GoblinResourceFileModel> SaveAsync(GoblinResourceUploadFileModel model, CancellationToken cancellationToken = default);
         
-        Task<FileModel> GetAsync(string slug, CancellationToken cancellationToken = default);
+        Task<GoblinResourceFileModel> GetAsync(string slug, CancellationToken cancellationToken = default);
         
         Task DeleteAsync(string slug, CancellationToken cancellationToken = default);
     }

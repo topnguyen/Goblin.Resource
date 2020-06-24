@@ -38,9 +38,9 @@ namespace Goblin.Service_Resource.Controllers
         /// <returns></returns>
         [ApiDocGroup("File")]
         [HttpPost]
-        [Route(Endpoints.UploadFile)]
-        [SwaggerResponse(StatusCodes.Status201Created, "File Saved", typeof(FileModel))]
-        public async Task<IActionResult> Upload([FromBody] UploadFileModel model, CancellationToken cancellationToken = default)
+        [Route(GoblinResourceEndpoints.UploadFile)]
+        [SwaggerResponse(StatusCodes.Status201Created, "File Saved", typeof(GoblinResourceFileModel))]
+        public async Task<IActionResult> Upload([FromBody] GoblinResourceUploadFileModel model, CancellationToken cancellationToken = default)
         {
             var fileModel = await _fileService.SaveAsync(model, cancellationToken);
             
@@ -55,8 +55,8 @@ namespace Goblin.Service_Resource.Controllers
         /// <returns></returns>
         [ApiDocGroup("File")]
         [HttpGet]
-        [Route(Endpoints.GetFile)]
-        [SwaggerResponse(StatusCodes.Status200OK, "File Information", typeof(FileModel))]
+        [Route(GoblinResourceEndpoints.GetFile)]
+        [SwaggerResponse(StatusCodes.Status200OK, "File Information", typeof(GoblinResourceFileModel))]
         public async Task<IActionResult> Get([FromQuery] string slug, CancellationToken cancellationToken = default)
         {
             var fileModel = await _fileService.GetAsync(slug, cancellationToken);
@@ -72,7 +72,7 @@ namespace Goblin.Service_Resource.Controllers
         /// <returns></returns>
         [ApiDocGroup("File")]
         [HttpDelete]
-        [Route(Endpoints.DeleteFile)]
+        [Route(GoblinResourceEndpoints.DeleteFile)]
         [SwaggerResponse(StatusCodes.Status204NoContent, "File Deleted")]
         public async Task<IActionResult> Delete([FromQuery] string slug, CancellationToken cancellationToken = default)
         {

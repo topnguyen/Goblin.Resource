@@ -1,6 +1,6 @@
 namespace Goblin.Service_Resource.Share
 {
-    public static class Endpoints
+    public static class GoblinResourceEndpoints
     {
         /// <summary>
         ///     Upload file endpoint <br />
