@@ -23,5 +23,21 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:Goblin.Service_Resource.Controllers.FileController.Get(System.String,System.Threading.CancellationToken)">
+            <summary>
+                Get File
+            </summary>
+            <param name="slug"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Goblin.Service_Resource.Controllers.FileController.Delete(System.String,System.Threading.CancellationToken)">
+            <summary>
+                Delete File
+            </summary>
+            <param name="slug"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

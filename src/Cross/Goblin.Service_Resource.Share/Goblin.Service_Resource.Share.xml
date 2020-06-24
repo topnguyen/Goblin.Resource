@@ -10,6 +10,20 @@
                 HTTP Method: PUT
             </summary>
         </member>
+        <member name="F:Goblin.Service_Resource.Share.Endpoints.GetFile">
+            <summary>
+                Get file information endpoint <br />
+                Add "slug" parameter in Query String <br />
+                HTTP Method: GET
+            </summary>
+        </member>
+        <member name="F:Goblin.Service_Resource.Share.Endpoints.DeleteFile">
+            <summary>
+                Delete a file endpoint <br />
+                Add "slug" parameter in Query String <br />
+                HTTP Method: DELETE
+            </summary>
+        </member>
         <member name="P:Goblin.Service_Resource.Share.Models.UploadFileModel.Folder">
             <summary>
                 Can pass multiple folder by "/" <br />

@@ -95,7 +95,7 @@ namespace Goblin.Service_Resource.Service
 
                 fileEntity.IsImage = true;
 
-                fileEntity.ImageDominantHexColor = imageInfo.DominantHexColor;
+                fileEntity.ImageDominantHexColor = imageInfo.DominantHexColor.ToLowerInvariant();
                 
                 fileEntity.ImageWidthPx = imageInfo.WidthPx;
                 

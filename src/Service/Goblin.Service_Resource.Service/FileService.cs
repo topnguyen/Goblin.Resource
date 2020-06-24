@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using Elect.DI.Attributes;
 using Goblin.Service_Resource.Contract.Repository.Interfaces;
@@ -6,12 +7,15 @@ using Goblin.Service_Resource.Contract.Service;
 using System.Threading;
 using System.Threading.Tasks;
 using Elect.Core.SecurityUtils;
+using Elect.Data.IO.FileUtils;
 using Elect.Data.IO.ImageUtils;
+using Elect.Mapper.AutoMapper.IQueryableUtils;
 using Elect.Mapper.AutoMapper.ObjUtils;
 using Elect.Web.StringUtils;
 using Goblin.Service_Resource.Contract.Repository.Models;
 using Goblin.Service_Resource.Core;
 using Goblin.Service_Resource.Share.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Goblin.Service_Resource.Service
 {
@@ -134,6 +138,58 @@ namespace Goblin.Service_Resource.Service
             var fileModel = fileEntity.MapTo<FileModel>();
 
             return fileModel;
+        }
+
+        public async Task<FileModel> GetAsync(string slug, CancellationToken cancellationToken = default)
+        {
+            slug = slug?.Trim().ToLowerInvariant();
+
+            if (string.IsNullOrWhiteSpace(slug))
+            {
+                return null;
+            }
+
+            var fileModel =
+                await _fileRepo
+                    .Get(x => x.Slug == slug)
+                    .QueryTo<FileModel>()
+                    .FirstOrDefaultAsync(cancellationToken: cancellationToken)
+                    .ConfigureAwait(true);
+
+            return fileModel;
+        }
+
+        public async Task DeleteAsync(string slug, CancellationToken cancellationToken = default)
+        {
+            slug = slug?.Trim().ToLowerInvariant();
+
+            if (string.IsNullOrWhiteSpace(slug))
+            {
+                return;
+            }
+
+            var fileEntity =
+                await _fileRepo
+                    .Get(x => x.Slug == slug)
+                    .FirstOrDefaultAsync(cancellationToken: cancellationToken)
+                    .ConfigureAwait(true);
+
+            if (fileEntity != null)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                
+                _fileRepo.Delete(fileEntity, true);
+                
+                // Delete Physical File
+
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), SystemSetting.Current.ResourceFolderPath, fileEntity.Slug);
+
+                FileHelper.SafeDelete(filePath);
+                
+                // Save Change
+                
+                await UnitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(true);
+            }
         }
     }
 }

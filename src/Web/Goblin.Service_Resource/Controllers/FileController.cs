@@ -46,5 +46,39 @@ namespace Goblin.Service_Resource.Controllers
             
             return Created(fileModel.Slug, fileModel);
         }
+        
+        /// <summary>
+        ///     Get File
+        /// </summary>
+        /// <param name="slug"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [ApiDocGroup("File")]
+        [HttpGet]
+        [Route(Endpoints.GetFile)]
+        [SwaggerResponse(StatusCodes.Status200OK, "File Information", typeof(FileModel))]
+        public async Task<IActionResult> Get([FromQuery] string slug, CancellationToken cancellationToken = default)
+        {
+            var fileModel = await _fileService.GetAsync(slug, cancellationToken);
+            
+            return Ok(fileModel);
+        }
+        
+        /// <summary>
+        ///     Delete File
+        /// </summary>
+        /// <param name="slug"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [ApiDocGroup("File")]
+        [HttpDelete]
+        [Route(Endpoints.DeleteFile)]
+        [SwaggerResponse(StatusCodes.Status204NoContent, "File Deleted")]
+        public async Task<IActionResult> Delete([FromQuery] string slug, CancellationToken cancellationToken = default)
+        {
+            await _fileService.DeleteAsync(slug, cancellationToken);
+            
+            return NoContent();
+        }
     }
 }
