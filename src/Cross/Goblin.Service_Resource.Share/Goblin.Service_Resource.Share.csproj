@@ -19,7 +19,7 @@
 
     <!-- Nuget -->
     <PropertyGroup>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <PackageOutputPath>..\..\..\nuget</PackageOutputPath>
         <NuspecFile>..\..\..\nuget\Goblin.ResourceService.nuspec</NuspecFile>
     </PropertyGroup>

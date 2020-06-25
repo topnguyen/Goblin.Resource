@@ -1,7 +1,7 @@
 ﻿{
   "ConnectionStrings": {
-    "Development": "Data Source=localhost,1433;Initial Catalog=Service_Resource;User ID=sa;Password=Password123;Application Name=Goblin.Service_Resource;Trusted_Connection=False;MultipleActiveResultSets=True",
-    "Staging": "Data Source=.;Initial Catalog=Service_Resource;User ID=Goblin.Service_Resource;Password=Goblin.Service_Resource;Application Name=Goblin.Service_Resource;Trusted_Connection=False;MultipleActiveResultSets=True",
-    "Production": "Data Source=.;Initial Catalog=Service_Resource;User ID=Service_Resource;Password=Goblin.Service_Resource;Application Name=Goblin.Service_Resource;Trusted_Connection=False;MultipleActiveResultSets=True"
+    "Development": "Data Source=.;Initial Catalog=Service_Resource;User ID=sa;Password=Password123;Application Name=Goblin.Service_Resource;Trusted_Connection=False;MultipleActiveResultSets=True",
+    "Staging": "Data Source=172.17.0.2;Initial Catalog=Service_Resource;User ID=sa;Password=Password123;Application Name=Goblin.Service_Resource;Trusted_Connection=False;MultipleActiveResultSets=True",
+    "Production": "Data Source=172.17.0.2;Initial Catalog=Service_Resource;User ID=sa;Password=Password123;Application Name=Goblin.Service_Resource;Trusted_Connection=False;MultipleActiveResultSets=True"
   }
 }
