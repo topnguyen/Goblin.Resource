@@ -14,4 +14,10 @@ docker rm --force goblin-service-resource
 
 # Network
 
+docker network ls
+
+docker network create -d bridge goblin
+
+docker network rm goblin
+
 docker network inspect bridge
