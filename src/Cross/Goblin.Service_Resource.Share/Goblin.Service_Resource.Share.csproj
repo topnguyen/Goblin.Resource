@@ -1,35 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<!-- Information -->
-	<PropertyGroup>
-		<!-- Language and Framework -->
-		<LangVersion>latest</LangVersion>
-		<TargetFramework>netstandard2.1</TargetFramework>
+    <!-- Information -->
+    <PropertyGroup>
+        <!-- Language and Framework -->
+        <LangVersion>latest</LangVersion>
+        <TargetFramework>netstandard2.1</TargetFramework>
 
-		<!-- Generate XML file -->
-		<DocumentationFile>Goblin.Service_Resource.Share.xml</DocumentationFile>
-		<!-- Disable warning for Controller/Action/Method not have block comment -->
-		<NoWarn>1701;1702;1705;1591</NoWarn>
+        <!-- Generate XML file -->
+        <DocumentationFile>Goblin.Service_Resource.Share.xml</DocumentationFile>
+        <!-- Disable warning for Controller/Action/Method not have block comment -->
+        <NoWarn>1701;1702;1705;1591</NoWarn>
 
-		<!-- Output -->
-		<OutputPath>.\bin\</OutputPath>
-		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-	</PropertyGroup>
+        <!-- Output -->
+        <OutputPath>.\bin\</OutputPath>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    </PropertyGroup>
 
-	<!-- Nuget -->
-	<PropertyGroup>
-		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<PackageOutputPath>..\..\..\nuget</PackageOutputPath>
-		<NuspecFile>..\..\..\nuget\Goblin.Service_Resource.nuspec</NuspecFile>
-	</PropertyGroup>
+    <!-- Nuget -->
+    <PropertyGroup>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageOutputPath>..\..\..\nuget</PackageOutputPath>
+        <NuspecFile>..\..\..\nuget\Goblin.ResourceService.nuspec</NuspecFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Elect.Core" Version="3.1.1" />
+
+        <!-- Share -->
+        <ProjectReference Include="..\..\..\Goblin.Core\Goblin.Core\Goblin.Core.csproj" />
+    </ItemGroup>
 	
-	<ItemGroup>
-	  <PackageReference Include="Elect.Core" Version="3.1.1" />
-	</ItemGroup>
-	
-	<ItemGroup>
-	  <ProjectReference Include="..\..\..\Goblin.Core\Goblin.Core\Goblin.Core.csproj" />
-	</ItemGroup>
-
 </Project>

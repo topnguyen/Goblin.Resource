@@ -12,9 +12,6 @@
     </PropertyGroup>
     
     <ItemGroup>
-		<!-- Share -->
-		<ProjectReference Include="..\..\..\Goblin.Core\Goblin.Core\Goblin.Core.csproj" />
-
 		<!-- Core -->
         <ProjectReference Include="..\Goblin.Service_Resource.Share\Goblin.Service_Resource.Share.csproj" />
     </ItemGroup>
