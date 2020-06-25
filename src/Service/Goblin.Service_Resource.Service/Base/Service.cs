@@ -4,11 +4,11 @@ namespace Goblin.Service_Resource.Service.Base
 {
     public abstract class Service
     {
-        protected readonly IUnitOfWork UnitOfWork;
+        protected readonly IGoblinUnitOfWork GoblinUnitOfWork;
 
-        protected Service(IUnitOfWork unitOfWork)
+        protected Service(IGoblinUnitOfWork goblinUnitOfWork)
         {
-            UnitOfWork = unitOfWork;
+            GoblinUnitOfWork = goblinUnitOfWork;
         }
     }
 }

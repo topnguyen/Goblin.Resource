@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Goblin.Service_Resource.Contract.Repository.Interfaces;
+using Goblin.Service_Resource.Contract.Service;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,9 +16,9 @@ namespace Goblin.Service_Resource
                 {
                     // Initial Database
                     
-                    var infrastructureBootstrapper = scope.ServiceProvider.GetService<IBootstrapper>();
+                    var bootstrapperService = scope.ServiceProvider.GetService<IBootstrapperService>();
                     
-                    infrastructureBootstrapper.InitialAsync().Wait();
+                    bootstrapperService.InitialAsync().Wait();
                 }
             );
         }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Goblin.Service_Resource.Repository.Migrations
 {
-    [DbContext(typeof(Service_Resource_DbContext))]
+    [DbContext(typeof(GoblinDbContext))]
     [Migration("20200623122327_Initial")]
     partial class Initial
     {

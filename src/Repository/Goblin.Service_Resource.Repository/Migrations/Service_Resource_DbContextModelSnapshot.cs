@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Goblin.Service_Resource.Repository.Migrations
 {
-    [DbContext(typeof(Service_Resource_DbContext))]
+    [DbContext(typeof(GoblinDbContext))]
     partial class Service_Resource_DbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

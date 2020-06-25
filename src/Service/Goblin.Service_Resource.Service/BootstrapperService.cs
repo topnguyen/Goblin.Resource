@@ -11,7 +11,7 @@ namespace Goblin.Service_Resource.Service
     {
         private readonly IBootstrapper _bootstrapper;
 
-        public BootstrapperService(IUnitOfWork unitOfWork, IBootstrapper bootstrapper) : base(unitOfWork)
+        public BootstrapperService(IGoblinUnitOfWork goblinUnitOfWork, IBootstrapper bootstrapper) : base(goblinUnitOfWork)
         {
             _bootstrapper = bootstrapper;
         }

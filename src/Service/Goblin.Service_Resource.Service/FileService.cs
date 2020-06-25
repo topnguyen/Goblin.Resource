@@ -22,9 +22,9 @@ namespace Goblin.Service_Resource.Service
     [ScopedDependency(ServiceType = typeof(IFileService))]
     public class FileService : Base.Service, IFileService
     {
-        private readonly IRepository<FileEntity> _fileRepo;
+        private readonly IGoblinRepository<FileEntity> _fileRepo;
 
-        public FileService(IUnitOfWork unitOfWork, IRepository<FileEntity> fileRepo) : base(unitOfWork)
+        public FileService(IGoblinUnitOfWork goblinUnitOfWork, IGoblinRepository<FileEntity> fileRepo) : base(goblinUnitOfWork)
         {
             _fileRepo = fileRepo;
         }
@@ -131,7 +131,7 @@ namespace Goblin.Service_Resource.Service
             
             _fileRepo.Add(fileEntity);
 
-            await UnitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(true);
+            await GoblinUnitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(true);
 
             // Response
             
@@ -188,7 +188,7 @@ namespace Goblin.Service_Resource.Service
                 
                 // Save Change
                 
-                await UnitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(true);
+                await GoblinUnitOfWork.SaveChangesAsync(cancellationToken).ConfigureAwait(true);
             }
         }
     }
