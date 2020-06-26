@@ -1,5 +1,5 @@
 ﻿{
-  "ConnectionStrings": {
+  "ConnectionString": {
     "Development": "Data Source=.;Initial Catalog=Resource;User ID=sa;Password=Password123;Application Name=Goblin.Resource;Trusted_Connection=False;MultipleActiveResultSets=True;Min Pool Size=100",
     "Staging": "Data Source=.;Initial Catalog=Resource;User ID=sa;Password=Password123;Application Name=Goblin.Resource;Trusted_Connection=False;MultipleActiveResultSets=True;Min Pool Size=100",
     "Production": "Data Source=.;Initial Catalog=Resource;User ID=sa;Password=Password123;Application Name=Goblin.Resource;Trusted_Connection=False;MultipleActiveResultSets=True;Min Pool Size=100"

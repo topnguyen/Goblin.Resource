@@ -18,8 +18,8 @@ namespace Goblin.Resource.Repository
 
             var config = configBuilder.Build();
 
-            var connectionString = config.GetValueByEnv<string>("ConnectionStrings");
-
+            var connectionString = config.GetValueByEnv<string>("ConnectionString");
+            
             var commandTimeoutInSecond = config.GetValueByEnv<int>("CommandTimeoutInSecond");
 
             var dbContextPoolSize = config.GetValueByEnv<int>("DbContextPoolSize");
