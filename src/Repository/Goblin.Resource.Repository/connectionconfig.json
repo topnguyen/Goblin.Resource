@@ -4,6 +4,15 @@
     "Staging": "Data Source=.;Initial Catalog=Resource;User ID=sa;Password=Password123;Application Name=Goblin.Resource;Trusted_Connection=False;MultipleActiveResultSets=True;Min Pool Size=100",
     "Production": "Data Source=.;Initial Catalog=Resource;User ID=sa;Password=Password123;Application Name=Goblin.Resource;Trusted_Connection=False;MultipleActiveResultSets=True;Min Pool Size=100"
   },
-  "CommandTimeoutInSecond": 300,
-  "DbContextPoolSize": 128
+  "CommandTimeoutInSecond": {
+    "Development": 300,
+    "Staging": 300,
+    "Production": 300
+  },
+  
+  "DbContextPoolSize": {
+    "Development": 128,
+    "Staging": 128,
+    "Production": 128
+  }
 }
