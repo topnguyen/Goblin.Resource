@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Goblin.Resource.Share</name>
+    </assembly>
+    <members>
+        <member name="F:Goblin.Resource.Share.GoblinResourceEndpoints.UploadFile">
+            <summary>
+                Upload file endpoint <br />
+                HTTP Method: PUT
+            </summary>
+        </member>
+        <member name="F:Goblin.Resource.Share.GoblinResourceEndpoints.GetFile">
+            <summary>
+                Get file information endpoint <br />
+                Add "slug" parameter in Query String <br />
+                HTTP Method: GET
+            </summary>
+        </member>
+        <member name="F:Goblin.Resource.Share.GoblinResourceEndpoints.DeleteFile">
+            <summary>
+                Delete a file endpoint <br />
+                Add "slug" parameter in Query String <br />
+                HTTP Method: DELETE
+            </summary>
+        </member>
+        <member name="P:Goblin.Resource.Share.Models.GoblinResourceUploadFileModel.Folder">
+            <summary>
+                Can pass multiple folder by "/" <br />
+                E.g Identity/Avatar
+            </summary>
+        </member>
+    </members>
+</doc>
