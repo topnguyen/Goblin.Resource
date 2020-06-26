@@ -53,10 +53,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goblin.Core", "Goblin.Core\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goblin.Core.Web", "Goblin.Core\Goblin.Core.Web\Goblin.Core.Web.csproj", "{0DDE9CEF-56A0-4C83-881F-CFC54D326752}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Test", "6. Test", "{9AA8365A-A837-45C0-8805-8DE63F9D8914}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goblin.Resource.Test", "src\Test\Goblin.Resource.Test\Goblin.Resource.Test.csproj", "{786A1C83-CDD0-467D-88FA-8C4837741630}"
-EndProject
 Global
 
 #----------
@@ -107,10 +103,6 @@ Global
 		{0DDE9CEF-56A0-4C83-881F-CFC54D326752}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DDE9CEF-56A0-4C83-881F-CFC54D326752}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DDE9CEF-56A0-4C83-881F-CFC54D326752}.Release|Any CPU.Build.0 = Release|Any CPU
-		{786A1C83-CDD0-467D-88FA-8C4837741630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{786A1C83-CDD0-467D-88FA-8C4837741630}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{786A1C83-CDD0-467D-88FA-8C4837741630}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{786A1C83-CDD0-467D-88FA-8C4837741630}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,7 +118,6 @@ Global
 		{E4A1944E-FC1E-4CBC-9494-48A9E704E7A7} = {13D7BE53-73B1-46B0-BB56-7681E917626D}
 		{322C432B-67F0-4A2A-AB1C-70CD3F4F32B1} = {603CFC20-7C35-4F44-B4F4-8033B2D5903C}
 		{0DDE9CEF-56A0-4C83-881F-CFC54D326752} = {603CFC20-7C35-4F44-B4F4-8033B2D5903C}
-		{786A1C83-CDD0-467D-88FA-8C4837741630} = {9AA8365A-A837-45C0-8805-8DE63F9D8914}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FDA8E922-2F0E-471E-96DD-4EF433F3ED92}

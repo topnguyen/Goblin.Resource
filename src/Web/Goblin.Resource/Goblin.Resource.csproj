@@ -43,8 +43,6 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\..\..\Goblin.Core\Goblin.Core.Web\Goblin.Core.Web.csproj" />
-        
         <ProjectReference Include="..\..\Cross\Goblin.Resource.Core\Goblin.Resource.Core.csproj" />
         <ProjectReference Include="..\..\Cross\Goblin.Resource.Mapper\Goblin.Resource.Mapper.csproj" />
         

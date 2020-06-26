@@ -10,6 +10,7 @@ using System.Linq;
 using Elect.DI.Attributes;
 using Goblin.Core.DateTimeUtils;
 using Goblin.Resource.Contract.Repository.Models;
+using Goblin.Resource.Core;
 
 namespace Goblin.Resource.Repository
 {
@@ -79,21 +80,30 @@ namespace Goblin.Resource.Repository
                     continue;
                 }
 
-                var loggedInUserId = 0; // TODO
+                var loggedInUserId = LoggedInUser.Current.Id;
 
                 if (entry.State == EntityState.Added)
                 {
-                    entity.CreatedBy = entity.LastUpdatedBy = entity.CreatedBy ?? loggedInUserId;
+                    if (entity.CreatedBy == null || entity.CreatedBy == default(long))
+                    {
+                        entity.CreatedBy = entity.LastUpdatedBy = loggedInUserId;
+                    }
                 }
                 else
                 {
                     if (entity.DeletedTime != null)
                     {
-                        entity.DeletedBy ??= loggedInUserId;
+                        if (entity.DeletedBy == null || entity.DeletedBy == default(long))
+                        {
+                            entity.DeletedBy = loggedInUserId;
+                        }
                     }
                     else
                     {
-                        entity.LastUpdatedBy ??= loggedInUserId;
+                        if (entity.LastUpdatedBy == null || entity.LastUpdatedBy == default(long))
+                        {
+                            entity.LastUpdatedBy = loggedInUserId;
+                        }
                     }
                 }
             }

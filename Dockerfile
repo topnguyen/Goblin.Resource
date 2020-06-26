@@ -20,8 +20,6 @@ COPY src/Service/Goblin.Resource.Service/*.csproj ./src/Service/Goblin.Resource.
 
 COPY src/Web/Goblin.Resource/*.csproj ./src/Web/Goblin.Resource/
 
-COPY src/Test/Goblin.Resource.Test/*.csproj ./src/Test/Goblin.Resource.Test/
-
 RUN dotnet restore
 
 # copy everything else and build app
@@ -40,8 +38,6 @@ COPY src/Service/Goblin.Resource.Contract.Service/. ./src/Service/Goblin.Resourc
 COPY src/Service/Goblin.Resource.Service/. ./src/Service/Goblin.Resource.Service/
 
 COPY src/Web/Goblin.Resource/. ./src/Web/Goblin.Resource/
-
-COPY src/Test/Goblin.Resource.Test/. ./src/Test/Goblin.Resource.Test/
 
 WORKDIR /source
 RUN dotnet publish -c release -o /publish --no-restore

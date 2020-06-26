@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using Goblin.Core.Models;
 
 namespace Goblin.Resource.Share.Models
 {
-    public class GoblinResourceUploadFileModel
+    public class GoblinResourceUploadFileModel : GoblinApiRequestModel
     {
         public string Name { get; set; }
 
@@ -20,7 +21,5 @@ namespace Goblin.Resource.Share.Models
         public int? ImageMaxWidthPx { get; set; }
 
         public int? ImageMaxHeightPx { get; set; }
-
-        public long? CreatedBy { get; set; }
     }
 }

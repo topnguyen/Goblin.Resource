@@ -3,7 +3,7 @@
     <PropertyGroup>
         <!-- Language and Framework -->
         <LangVersion>latest</LangVersion>
-        <TargetFramework>netstandard2.1</TargetFramework>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
 
         <!-- Output -->
         <OutputPath>.\bin\</OutputPath>

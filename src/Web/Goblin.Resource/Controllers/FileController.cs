@@ -60,7 +60,7 @@ namespace Goblin.Resource.Controllers
         public async Task<IActionResult> Get([FromQuery] string slug, CancellationToken cancellationToken = default)
         {
             var fileModel = await _fileService.GetAsync(slug, cancellationToken);
-            
+
             return Ok(fileModel);
         }
         

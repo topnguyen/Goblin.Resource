@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
+using Goblin.Core.Constants;
 using Goblin.Core.Errors;
 using Goblin.Resource.Share.Models;
 
@@ -12,13 +13,14 @@ namespace Goblin.Resource.Share
     {
         public static string Domain { get; set; } = string.Empty;
 
-        public static async Task<GoblinResourceFileModel> UploadAsync(GoblinResourceUploadFileModel model,
-            CancellationToken cancellationToken = default)
+        public static async Task<GoblinResourceFileModel> UploadAsync(GoblinResourceUploadFileModel model, CancellationToken cancellationToken = default)
         {
             try
             {
                 var fileModel = await Domain
                     .AppendPathSegment(GoblinResourceEndpoints.UploadFile)
+                    .WithHeader(GoblinHeaderKeys.Authorization, model.AuthorizationKey)
+                    .WithHeader(GoblinHeaderKeys.UserId, model.LoggedInUserId)
                     .PostJsonAsync(model, cancellationToken: cancellationToken)
                     .ReceiveJson<GoblinResourceFileModel>()
                     .ConfigureAwait(true);
@@ -42,22 +44,28 @@ namespace Goblin.Resource.Share
             }
         }
 
-        public static async Task<GoblinResourceFileModel> GetAsync(string slug, CancellationToken cancellationToken = default)
+        public static async Task<GoblinResourceFileModel> GetAsync(GoblinResourceGetFileModel model, CancellationToken cancellationToken = default)
         {
             var fileModel = await Domain
                 .AppendPathSegment(GoblinResourceEndpoints.GetFile)
-                .SetQueryParam("slug", slug)
+                .WithHeader(GoblinHeaderKeys.Authorization, model.AuthorizationKey)
+                .WithHeader(GoblinHeaderKeys.UserId, model.LoggedInUserId)
+                .SetQueryParam("slug", model.Slug)
+                .SetQueryParam(GoblinHeaderKeys.Authorization, model.AuthorizationKey)
+                .SetQueryParam(GoblinHeaderKeys.UserId, model.LoggedInUserId)
                 .GetJsonAsync<GoblinResourceFileModel>(cancellationToken: cancellationToken)
                 .ConfigureAwait(true);
 
             return fileModel;
         }
 
-        public static async Task DeleteAsync(string slug, CancellationToken cancellationToken = default)
+        public static async Task DeleteAsync(GoblinResourceDeleteFileModel model, CancellationToken cancellationToken = default)
         {
             await Domain
                 .AppendPathSegment(GoblinResourceEndpoints.DeleteFile)
-                .SetQueryParam("slug", slug)
+                .WithHeader(GoblinHeaderKeys.Authorization, model.AuthorizationKey)
+                .WithHeader(GoblinHeaderKeys.UserId, model.LoggedInUserId)
+                .SetQueryParam("slug", model.Slug)
                 .DeleteAsync(cancellationToken)
                 .ConfigureAwait(true);
         }

@@ -8,7 +8,7 @@ namespace Goblin.Resource.Core
         ///     Authorization Key to Access the Application
         /// </summary>
         /// <remarks>Use for protect Service in Public Network, empty or null for allow anonymous.</remarks>
-        public string Authorization { get; set; }
+        public string AuthorizationKey { get; set; }
 
         public int ImageMaxWidthPx { get; set; }
 

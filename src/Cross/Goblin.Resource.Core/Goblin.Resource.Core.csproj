@@ -3,8 +3,8 @@
     <PropertyGroup>
         <!-- Language and Framework -->
         <LangVersion>latest</LangVersion>
-		<TargetFramework>netstandard2.1</TargetFramework>
-
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        
 		<!-- Output -->
         <OutputPath>.\bin\</OutputPath>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -12,7 +12,10 @@
     </PropertyGroup>
     
     <ItemGroup>
-		<!-- Core -->
+		<!-- Share -->
         <ProjectReference Include="..\Goblin.Resource.Share\Goblin.Resource.Share.csproj" />
+
+        <!-- Core -->
+        <ProjectReference Include="..\..\..\Goblin.Core\Goblin.Core.Web\Goblin.Core.Web.csproj" />
     </ItemGroup>
 </Project>

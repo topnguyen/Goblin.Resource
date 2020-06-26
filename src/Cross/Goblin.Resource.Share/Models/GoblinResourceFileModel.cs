@@ -3,7 +3,6 @@ namespace Goblin.Resource.Share.Models
     public class GoblinResourceFileModel
     {
         public string Slug { get; set; }
-        
 
         public string Folder { get; set; }
 
