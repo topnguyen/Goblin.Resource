@@ -10,38 +10,33 @@ namespace Goblin.Resource.Repository
 {
     public static class IServiceCollectionExtensions
     {
-        private const int CommandTimeoutInSecond = 5 * 60;
-        
-        private const int PoolSize = 128;
-
         public static IServiceCollection AddGoblinDbContext(this IServiceCollection services)
         {
+            var configBuilder =
+                new ConfigurationBuilder()
+                    .AddJsonFile("connectionconfig.json", false, false);
+
+            var config = configBuilder.Build();
+
+            var connectionString = config.GetValueByEnv<string>("ConnectionStrings");
+
+            var commandTimeoutInSecond = config.GetValueByEnv<int>("CommandTimeoutInSecond");
+
+            var dbContextPoolSize = config.GetValueByEnv<int>("DbContextPoolSize");
+
             services.AddDbContextPool<IDbContext, GoblinDbContext>(optionsBuilder =>
             {
-                var config =
-                    new ConfigurationBuilder()
-                        .AddJsonFile(Elect.Core.Constants.ConfigurationFileName.ConnectionConfig, false, true)
-                        .Build();
-
-                var connectionString =
-                    config.GetValueByEnv<string>(Elect.Core.Constants.ConfigurationSectionName.ConnectionStrings);
-
-                optionsBuilder.UseSqlServer(connectionString, sqlServerOptionsAction =>
-                {
-                    // Command timeout in seconds
-                    sqlServerOptionsAction.CommandTimeout(CommandTimeoutInSecond);
-
-                    sqlServerOptionsAction.MigrationsAssembly(typeof(GoblinDbContext).GetTypeInfo().Assembly
-                        .GetName().Name);
-
-                    sqlServerOptionsAction.MigrationsHistoryTable("Migration");
-                });
-
-                optionsBuilder.EnableSensitiveDataLogging(EnvHelper.IsDevelopment());
-
-                // Force all query is No Tracking to boost-up performance
-                optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-            }, PoolSize);
+                optionsBuilder
+                    .UseSqlServer(connectionString, sqlServerOptionsAction =>
+                    {
+                        sqlServerOptionsAction
+                            .CommandTimeout(commandTimeoutInSecond)
+                            .MigrationsAssembly(typeof(GoblinDbContext).GetTypeInfo().Assembly.GetName().Name)
+                            .MigrationsHistoryTable("Migration");
+                    })
+                    .EnableSensitiveDataLogging(EnvHelper.IsDevelopment())
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            }, dbContextPoolSize);
 
             return services;
         }
