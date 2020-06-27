@@ -20,21 +20,5 @@ namespace Goblin.Resource.Core.Validators
                 .Must(x => !x.HasValue ||  x <= SystemSetting.Current.ImageMaxHeightPx)
                 .WithMessage($"Maximum Image Width is {SystemSetting.Current.ImageMaxHeightPx}px");
         }
-        
-        public string Name { get; set; }
-
-        public string ContentBase64 { get; set; }
-
-        /// <summary>
-        ///     Can pass multiple folder by "/" <br />
-        ///     E.g Identity/Avatar
-        /// </summary>
-        public string Folder { get; set; }
-
-        public bool IsEnableCompressImage { get; set; } = true;
-
-        public int? ImageMaxWidthPx { get; set; }
-
-        public int? ImageMaxHeightPx { get; set; }
     }
 }

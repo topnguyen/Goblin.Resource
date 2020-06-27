@@ -1,14 +1,29 @@
-﻿using Elect.Data.EF.Utils.ModelBuilderUtils;
+﻿using System.Reflection;
+using Elect.Data.EF.Utils.ModelBuilderUtils;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace Goblin.Resource.Repository
 {
     public sealed partial class GoblinDbContext : Elect.Data.EF.Services.DbContext.DbContext
     {
+        public GoblinDbContext()
+        {
+            
+        }
+        
         public GoblinDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
 
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (optionsBuilder.IsConfigured)
+            {
+                return;
+            }
+            
+            GoblinDbContextSetup.Build(null, optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
