@@ -14,8 +14,6 @@ namespace Goblin.Resource
                     webHostBuilder.UseStartup<Startup>();
                 }, scope =>
                 {
-                    // Initial Database
-                    
                     var bootstrapperService = scope.ServiceProvider.GetService<IBootstrapperService>();
                     
                     bootstrapperService.InitialAsync().Wait();
