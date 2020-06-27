@@ -6,11 +6,6 @@ namespace Goblin.Resource.Repository
 {
     public sealed partial class GoblinDbContext : Elect.Data.EF.Services.DbContext.DbContext
     {
-        public GoblinDbContext()
-        {
-            
-        }
-        
         public GoblinDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
 

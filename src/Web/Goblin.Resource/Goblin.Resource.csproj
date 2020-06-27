@@ -38,7 +38,7 @@
     </PropertyGroup>
     <!-- Copy to Output -->
     <ItemGroup>
-        <Content Include="Goblin.Resource.xml">
+        <Content Include="Goblin.Resource.xml;">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
