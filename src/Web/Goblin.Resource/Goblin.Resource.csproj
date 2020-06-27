@@ -11,24 +11,6 @@
         <DocumentationFile>Goblin.Resource.xml</DocumentationFile>
         <NoWarn>1701;1702;1705;1591</NoWarn>
 
-        <!-- UI -->
-        <AddRazorSupportForMvc>false</AddRazorSupportForMvc>
-
-        <!-- Very Important to enable Razor Recompile Feature, turn is to false cannot get Views.dll in build folder -->
-        <EnableDefaultContentItems>true</EnableDefaultContentItems>
-        
-        <!-- Mvc Razor Compile -->
-        <RazorCompileOnPublish>false</RazorCompileOnPublish>
-        <RazorCompileOnBuild>false</RazorCompileOnBuild>
-
-        <!-- 
-            As far as I know, this is primarily used for Razor pages. 
-            They are compiled at runtime, and the compiler needs access to reference assemblies, to make sure it compiles correctly. 
-            So, to use Razor pages, you need to set preserveCompilationContext, which then includes all the necessary files in the published output.
-            If you don't need runtime compilation, you don't have to set preserveCompilationContext.
-        -->
-        <PreserveCompilationContext>false</PreserveCompilationContext>
-
         <!-- Output -->
         <OutputPath>.\bin\</OutputPath>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -38,7 +20,7 @@
     </PropertyGroup>
     <!-- Copy to Output -->
     <ItemGroup>
-        <Content Include="Goblin.Resource.xml;">
+        <Content Include="Goblin.Resource.xml">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
