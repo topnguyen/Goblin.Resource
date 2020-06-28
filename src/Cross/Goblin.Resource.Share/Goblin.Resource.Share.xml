@@ -7,7 +7,7 @@
         <member name="F:Goblin.Resource.Share.GoblinResourceEndpoints.UploadFile">
             <summary>
                 Upload file endpoint <br />
-                HTTP Method: PUT
+                HTTP Method: POST
             </summary>
         </member>
         <member name="F:Goblin.Resource.Share.GoblinResourceEndpoints.GetFile">

@@ -12,6 +12,12 @@ namespace Goblin.Resource.Share
     public static class GoblinResourceHelper
     {
         public static string Domain { get; set; } = string.Empty;
+        
+        /// <summary>
+        ///     Authorization Key
+        ///     <remarks>This field only used on Header, will auto ignore in body</remarks>
+        /// </summary>
+        public static string AuthorizationKey { get; set; } = string.Empty;
 
         public static async Task<GoblinResourceFileModel> UploadAsync(GoblinResourceUploadFileModel model, CancellationToken cancellationToken = default)
         {
@@ -19,7 +25,7 @@ namespace Goblin.Resource.Share
             {
                 var fileModel = await Domain
                     .AppendPathSegment(GoblinResourceEndpoints.UploadFile)
-                    .WithHeader(GoblinHeaderKeys.Authorization, model.AuthorizationKey)
+                    .WithHeader(GoblinHeaderKeys.Authorization, AuthorizationKey)
                     .WithHeader(GoblinHeaderKeys.UserId, model.LoggedInUserId)
                     .PostJsonAsync(model, cancellationToken: cancellationToken)
                     .ReceiveJson<GoblinResourceFileModel>()
@@ -48,10 +54,9 @@ namespace Goblin.Resource.Share
         {
             var fileModel = await Domain
                 .AppendPathSegment(GoblinResourceEndpoints.GetFile)
-                .WithHeader(GoblinHeaderKeys.Authorization, model.AuthorizationKey)
+                .WithHeader(GoblinHeaderKeys.Authorization, AuthorizationKey)
                 .WithHeader(GoblinHeaderKeys.UserId, model.LoggedInUserId)
                 .SetQueryParam("slug", model.Slug)
-                .SetQueryParam(GoblinHeaderKeys.Authorization, model.AuthorizationKey)
                 .SetQueryParam(GoblinHeaderKeys.UserId, model.LoggedInUserId)
                 .GetJsonAsync<GoblinResourceFileModel>(cancellationToken: cancellationToken)
                 .ConfigureAwait(true);
@@ -63,7 +68,7 @@ namespace Goblin.Resource.Share
         {
             await Domain
                 .AppendPathSegment(GoblinResourceEndpoints.DeleteFile)
-                .WithHeader(GoblinHeaderKeys.Authorization, model.AuthorizationKey)
+                .WithHeader(GoblinHeaderKeys.Authorization, AuthorizationKey)
                 .WithHeader(GoblinHeaderKeys.UserId, model.LoggedInUserId)
                 .SetQueryParam("slug", model.Slug)
                 .DeleteAsync(cancellationToken)
