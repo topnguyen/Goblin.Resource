@@ -4,7 +4,7 @@ namespace Goblin.Resource.Share
     {
         /// <summary>
         ///     Upload file endpoint <br />
-        ///     HTTP Method: PUT
+        ///     HTTP Method: POST
         /// </summary>
         public const string UploadFile = "/files";
         
