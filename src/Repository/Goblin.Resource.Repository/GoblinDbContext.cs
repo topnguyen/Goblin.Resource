@@ -11,16 +11,6 @@ namespace Goblin.Resource.Repository
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (optionsBuilder.IsConfigured)
-            {
-                return;
-            }
-            
-            GoblinDbContextSetup.Build(null, optionsBuilder);
-        }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

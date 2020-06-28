@@ -2,13 +2,14 @@ using System.Reflection;
 using Elect.Core.ConfigUtils;
 using Elect.Core.EnvUtils;
 using Elect.Data.EF.Interfaces.DbContext;
+using Goblin.Resource.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Goblin.Resource.Repository
+namespace Goblin.Notification.Repository
 {
-    public static class GoblinDbContextSetup
+    public static class GoblinDbContextFactoryHelper
     {
         /// <summary>
         ///     Setup Goblin DB Context based on have <param name="services"></param> data or not <br />

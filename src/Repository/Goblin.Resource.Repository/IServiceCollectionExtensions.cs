@@ -1,3 +1,4 @@
+using Goblin.Notification.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Goblin.Resource.Repository
@@ -6,7 +7,7 @@ namespace Goblin.Resource.Repository
     {
         public static IServiceCollection AddGoblinDbContext(this IServiceCollection services)
         {
-            GoblinDbContextSetup.Build(services, null);
+            GoblinDbContextFactoryHelper.Build(services, null);
             
             return services;
         }

@@ -9,18 +9,22 @@ namespace Goblin.Resource.Service
     [ScopedDependency(ServiceType = typeof(IBootstrapperService))]
     public class BootstrapperService : Base.Service, IBootstrapperService
     {
-        public BootstrapperService(IGoblinUnitOfWork goblinUnitOfWork) : base(goblinUnitOfWork)
+        private readonly IBootstrapper _bootstrapper;
+
+        public BootstrapperService(IGoblinUnitOfWork goblinUnitOfWork, IBootstrapper bootstrapper) : base(
+            goblinUnitOfWork)
         {
+            _bootstrapper = bootstrapper;
         }
 
-        public Task InitialAsync(CancellationToken cancellationToken = default)
+        public async Task InitialAsync(CancellationToken cancellationToken = default)
         {
-            return Task.CompletedTask;
+            await _bootstrapper.InitialAsync(cancellationToken).ConfigureAwait(true);
         }
 
-        public Task RebuildAsync(CancellationToken cancellationToken = default)
+        public async Task RebuildAsync(CancellationToken cancellationToken = default)
         {
-            return Task.CompletedTask;
+            await _bootstrapper.RebuildAsync(cancellationToken).ConfigureAwait(true);
         }
     }
 }
