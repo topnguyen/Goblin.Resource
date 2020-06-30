@@ -24,6 +24,12 @@
                 HTTP Method: DELETE
             </summary>
         </member>
+        <member name="P:Goblin.Resource.Share.GoblinResourceHelper.AuthorizationKey">
+            <summary>
+                Authorization Key
+                <remarks>This field only used on Header, will auto ignore in body</remarks>
+            </summary>
+        </member>
         <member name="P:Goblin.Resource.Share.Models.GoblinResourceUploadFileModel.Folder">
             <summary>
                 Can pass multiple folder by "/" <br />
