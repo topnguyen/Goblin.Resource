@@ -13,13 +13,13 @@
         <icon>Logo.png</icon>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>aspnetcore goblin topnguyen</tags>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
 
         <dependencies>
             <group targetFramework="netstandard2.1">
 
                 <!-- Elect -->
-                <dependency id="Elect.Core" version="3.1.1"/>
+                <dependency id="Elect.Core" version="3.1.2"/>
 
             </group>
         </dependencies>
