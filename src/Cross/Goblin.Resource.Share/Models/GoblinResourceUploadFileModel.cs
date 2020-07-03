@@ -3,7 +3,7 @@ using Goblin.Core.Models;
 
 namespace Goblin.Resource.Share.Models
 {
-    public class GoblinResourceUploadFileModel : GoblinApiRequestModel
+    public class GoblinResourceUploadFileModel : GoblinApiSubmitRequestModel
     {
         public string Name { get; set; }
 
