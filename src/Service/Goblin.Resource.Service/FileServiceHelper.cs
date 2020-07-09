@@ -81,9 +81,7 @@ namespace Goblin.Resource.Service
             fileEntity.IsImage = false;
             
             fileEntity.IsCompressedImage = false;
-
-            fileEntity.Extension = Path.GetExtension(fileEntity.Name);
-
+            
             fileEntity.MimeType =
                 string.IsNullOrWhiteSpace(fileEntity.Extension)
                     ? "application/octet-stream"
@@ -108,16 +106,22 @@ namespace Goblin.Resource.Service
 
             // Handle file name
 
-            if (string.IsNullOrWhiteSpace(fileEntity.Name))
+            if (!string.IsNullOrWhiteSpace(fileEntity.Name))
             {
                 fileEntity.Name = FileHelper.MakeValidFileName(fileEntity.Name);
                 
-                if (fileEntity.Name.EndsWith(fileEntity.Extension))
+                fileEntity.Extension = Path.GetExtension(fileEntity.Name);
+
+                if (!string.IsNullOrWhiteSpace(fileEntity.Extension) && fileEntity.Name.EndsWith(fileEntity.Extension))
                 {
                     // Get File Name Only
 
                     fileEntity.Name = fileEntity.Name.Substring(0, fileEntity.Name.Length - fileEntity.Extension.Length);
                 }
+            }
+            else
+            {
+                fileEntity.Name = Elect.Core.StringUtils.StringHelper.Generate(8, false);
             }
         }
 

@@ -2,8 +2,6 @@ namespace Goblin.Resource.Contract.Repository.Models
 {
     public class FileEntity : GoblinEntity
     {
-        public string Url { get; set; }
-        
         public string Slug { get; set; }
 
         public string Folder { get; set; }

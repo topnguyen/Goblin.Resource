@@ -1,7 +1,10 @@
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Elect.Web.HttpUtils;
 using Elect.Web.Swagger.Attributes;
 using Goblin.Resource.Contract.Service;
+using Goblin.Resource.Core;
 using Goblin.Resource.Share;
 using Goblin.Resource.Share.Models;
 using Microsoft.AspNetCore.Http;
@@ -43,6 +46,8 @@ namespace Goblin.Resource.Controllers
         public async Task<IActionResult> Upload([FromBody] GoblinResourceUploadFileModel model, CancellationToken cancellationToken = default)
         {
             var fileModel = await _fileService.SaveAsync(model, cancellationToken);
+
+            fileModel.Slug = Path.Combine(HttpContext.Request.GetDomain(), SystemSetting.Current.ResourceFolderEndpoint, fileModel.Slug);
             
             return Created(fileModel.Slug, fileModel);
         }
@@ -61,6 +66,8 @@ namespace Goblin.Resource.Controllers
         {
             var fileModel = await _fileService.GetAsync(slug, cancellationToken);
 
+            fileModel.Slug = Path.Combine(HttpContext.Request.GetDomain(), SystemSetting.Current.ResourceFolderEndpoint, fileModel.Slug);
+
             return Ok(fileModel);
         }
         
@@ -76,6 +83,15 @@ namespace Goblin.Resource.Controllers
         [SwaggerResponse(StatusCodes.Status204NoContent, "File Deleted")]
         public async Task<IActionResult> Delete([FromQuery] string slug, CancellationToken cancellationToken = default)
         {
+            if (string.IsNullOrWhiteSpace(slug))
+            {
+                return BadRequest("Invalid Slug");
+            }
+            
+            var resourcePath = Path.Combine(HttpContext.Request.GetDomain(), SystemSetting.Current.ResourceFolderEndpoint);
+
+            slug = slug.Replace(resourcePath, string.Empty);
+
             await _fileService.DeleteAsync(slug, cancellationToken);
             
             return NoContent();

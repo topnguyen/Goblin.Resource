@@ -96,8 +96,6 @@ namespace Goblin.Resource.Service
                 // Save File
                 
                 fileEntity.Slug = FileServiceHelper.SaveFile(fileBytes, model.Folder, fileName, string.Empty, fileEntity.Extension);
-
-                fileEntity.Url = Path.Combine(HttpContext.Current.Request.GetDomain(), SystemSetting.Current.ResourceFolderEndpoint, fileEntity.Slug);
                 
                 fileEntity.ContentLength = fileBytes.Length;
                 
@@ -130,8 +128,6 @@ namespace Goblin.Resource.Service
                 fileName += $"-f-{fileEntity.Name.ToFriendlySlug()}";
                 
                 fileEntity.Slug = FileServiceHelper.SaveFile(fileBytes, model.Folder, fileName, string.Empty, fileEntity.Extension);
-
-                fileEntity.Url = Path.Combine(HttpContext.Current.Request.GetDomain(), SystemSetting.Current.ResourceFolderEndpoint, fileEntity.Slug);
 
                 fileEntity.ContentLength = fileBytes.Length;
             }
