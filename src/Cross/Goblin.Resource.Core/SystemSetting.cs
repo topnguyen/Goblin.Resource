@@ -23,6 +23,10 @@ namespace Goblin.Resource.Core
         public int ImageThumbnailMaxHeightPx { get; set; }
 
         public string ResourceFolderPath { get; set; }
+        
+        public string ResourceFolderEndpoint { get; set; }
+        
+        public bool IsEnableDictionaryBrowser { get; set; }
 
         public string DefaultFolderName { get; set; }
     }

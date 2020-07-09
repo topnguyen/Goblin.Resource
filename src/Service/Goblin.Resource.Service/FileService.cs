@@ -88,8 +88,9 @@ namespace Goblin.Resource.Service
                     FileServiceHelper.FillInformation(newImageInfo, fileEntity);
                 }
                 
-                fileName += $"-i-{fileEntity.ImageDominantHexColor}-w{fileEntity.ImageWidthPx}-h{fileEntity.ImageHeightPx}-{fileEntity.Name.ToFriendlySlug()}";
-
+                fileName += $"-i-{fileEntity.ImageDominantHexColor.Trim('#')}-w{fileEntity.ImageWidthPx}-h{fileEntity.ImageHeightPx}-{fileEntity.Name.ToFriendlySlug()}";
+                fileName = fileName.ToLowerInvariant();
+                
                 // Save File
                 
                 fileEntity.Slug = FileServiceHelper.SaveFile(fileBytes, model.Folder, fileName, string.Empty, fileEntity.Extension);

@@ -173,9 +173,9 @@ namespace Goblin.Resource.Service
         {
             fileRelativePath = PathHelper.CorrectPathSeparatorChar(fileRelativePath);
 
-            var fileAbsolutePath = Path.Combine(Directory.GetCurrentDirectory(),
-                SystemSetting.Current.ResourceFolderPath,
-                fileRelativePath);
+            var fileAbsolutePath = Path.Combine(SystemSetting.Current.ResourceFolderPath, fileRelativePath);
+            
+            fileAbsolutePath = PathHelper.GetFullPath(fileAbsolutePath);
 
             var folderAbsolutePath = Path.GetDirectoryName(fileAbsolutePath);
 

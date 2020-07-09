@@ -27,7 +27,7 @@ namespace Goblin.Resource.Controllers
         ///     Example: cngxhiuqkkq-f-sample-excel.xlsx <br />
         ///     <br />
         ///     <b>Slug Format for Image</b>: {id}-i-{hex color}-{width in px}-{height in px}-{file name}.{extension} <br />
-        ///     Example: cngxhiuqkkq-i-#2B181B-w288-h163-sample-image.png <br />
+        ///     Example: cngxhiuqkkq-i-2B181B-w288-h163-sample-image.png <br />
         ///     <br />
         ///     <b>Image Slug</b><br />
         ///     "{image slug}-s" to access Skeleton/Small 60x60 image <br />
