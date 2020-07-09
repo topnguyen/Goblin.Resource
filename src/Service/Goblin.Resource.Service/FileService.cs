@@ -11,6 +11,8 @@ using Elect.Data.IO.FileUtils;
 using Elect.Data.IO.ImageUtils;
 using Elect.Mapper.AutoMapper.IQueryableUtils;
 using Elect.Mapper.AutoMapper.ObjUtils;
+using Elect.Web.HttpUtils;
+using Elect.Web.Middlewares.HttpContextMiddleware;
 using Elect.Web.StringUtils;
 using Goblin.Resource.Contract.Repository.Models;
 using Goblin.Resource.Core;
@@ -95,6 +97,8 @@ namespace Goblin.Resource.Service
                 
                 fileEntity.Slug = FileServiceHelper.SaveFile(fileBytes, model.Folder, fileName, string.Empty, fileEntity.Extension);
 
+                fileEntity.Url = Path.Combine(HttpContext.Current.Request.GetDomain(), SystemSetting.Current.ResourceFolderEndpoint, fileEntity.Slug);
+                
                 fileEntity.ContentLength = fileBytes.Length;
                 
                 // --------------------------
@@ -126,6 +130,8 @@ namespace Goblin.Resource.Service
                 fileName += $"-f-{fileEntity.Name.ToFriendlySlug()}";
                 
                 fileEntity.Slug = FileServiceHelper.SaveFile(fileBytes, model.Folder, fileName, string.Empty, fileEntity.Extension);
+
+                fileEntity.Url = Path.Combine(HttpContext.Current.Request.GetDomain(), SystemSetting.Current.ResourceFolderEndpoint, fileEntity.Slug);
 
                 fileEntity.ContentLength = fileBytes.Length;
             }
