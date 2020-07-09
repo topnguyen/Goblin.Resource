@@ -103,14 +103,23 @@ namespace Goblin.Resource.Service
                 
                 fileEntity.Extension = imageInfo.Extension;
             }
+            else
+            {
+                fileEntity.Extension = Path.GetExtension(fileEntity.Name);
+            }
+            
+            // Handle file extension
 
+            if (string.IsNullOrWhiteSpace(fileEntity.Extension))
+            {
+                fileEntity.Extension = MimeTypeHelper.GetExtension(fileEntity.MimeType);
+            }
+            
             // Handle file name
 
             if (!string.IsNullOrWhiteSpace(fileEntity.Name))
             {
                 fileEntity.Name = FileHelper.MakeValidFileName(fileEntity.Name);
-                
-                fileEntity.Extension = Path.GetExtension(fileEntity.Name);
 
                 if (!string.IsNullOrWhiteSpace(fileEntity.Extension) && fileEntity.Name.EndsWith(fileEntity.Extension))
                 {
@@ -121,7 +130,7 @@ namespace Goblin.Resource.Service
             }
             else
             {
-                fileEntity.Name = Elect.Core.StringUtils.StringHelper.Generate(8, false);
+                fileEntity.Name = Elect.Core.StringUtils.StringHelper.Generate(4, false);
             }
         }
 

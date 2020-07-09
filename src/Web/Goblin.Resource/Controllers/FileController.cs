@@ -47,7 +47,7 @@ namespace Goblin.Resource.Controllers
         {
             var fileModel = await _fileService.SaveAsync(model, cancellationToken);
 
-            fileModel.Slug = Path.Combine(HttpContext.Request.GetDomain(), SystemSetting.Current.ResourceFolderEndpoint, fileModel.Slug);
+            fileModel.Slug = Path.Combine(HttpContext.Request.GetDomain(), SystemSetting.Current.ResourceFolderEndpoint.Trim('/'), fileModel.Slug);
             
             return Created(fileModel.Slug, fileModel);
         }
@@ -66,7 +66,7 @@ namespace Goblin.Resource.Controllers
         {
             var fileModel = await _fileService.GetAsync(slug, cancellationToken);
 
-            fileModel.Slug = Path.Combine(HttpContext.Request.GetDomain(), SystemSetting.Current.ResourceFolderEndpoint, fileModel.Slug);
+            fileModel.Slug = Path.Combine(HttpContext.Request.GetDomain(), SystemSetting.Current.ResourceFolderEndpoint.Trim('/'), fileModel.Slug);
 
             return Ok(fileModel);
         }
@@ -88,7 +88,7 @@ namespace Goblin.Resource.Controllers
                 return BadRequest("Invalid Slug");
             }
             
-            var resourcePath = Path.Combine(HttpContext.Request.GetDomain(), SystemSetting.Current.ResourceFolderEndpoint);
+            var resourcePath = Path.Combine(HttpContext.Request.GetDomain(), SystemSetting.Current.ResourceFolderEndpoint.Trim('/'));
 
             slug = slug.Replace(resourcePath, string.Empty);
 

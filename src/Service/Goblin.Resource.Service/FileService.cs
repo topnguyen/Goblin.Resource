@@ -11,8 +11,6 @@ using Elect.Data.IO.FileUtils;
 using Elect.Data.IO.ImageUtils;
 using Elect.Mapper.AutoMapper.IQueryableUtils;
 using Elect.Mapper.AutoMapper.ObjUtils;
-using Elect.Web.HttpUtils;
-using Elect.Web.Middlewares.HttpContextMiddleware;
 using Elect.Web.StringUtils;
 using Goblin.Resource.Contract.Repository.Models;
 using Goblin.Resource.Core;
@@ -80,7 +78,10 @@ namespace Goblin.Resource.Service
                     model.ImageMaxHeightPx.Value,
                     model.IsEnableCompressImage);
 
-                fileEntity.IsCompressedImage = true;
+                if (model.IsEnableCompressImage)
+                {
+                    fileEntity.IsCompressedImage = true;
+                }
 
                 // Refill information after resize and compress
 
