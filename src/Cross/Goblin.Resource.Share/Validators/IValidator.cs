@@ -1,4 +1,4 @@
-﻿namespace Goblin.Resource.Core.Validators
+﻿namespace Goblin.Resource.Share.Validators
 {
     public interface IValidator
     {

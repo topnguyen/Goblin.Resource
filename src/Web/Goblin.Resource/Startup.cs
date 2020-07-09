@@ -1,8 +1,8 @@
 ﻿using Elect.Core.ConfigUtils;
 using Goblin.Core.Web.Setup;
-using Goblin.Resource.Core.Validators;
 using Goblin.Resource.Core;
 using Goblin.Resource.Repository;
+using Goblin.Resource.Share.Validators;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
