@@ -13,7 +13,7 @@
         <icon>Logo.png</icon>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>aspnetcore goblin topnguyen</tags>
-        <version>1.0.8</version>
+        <version>1.0.9</version>
 
         <dependencies>
             <group targetFramework="netcoreapp3.1">
