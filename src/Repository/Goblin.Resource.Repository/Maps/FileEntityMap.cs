@@ -11,6 +11,8 @@ namespace Goblin.Resource.Repository.Maps
             base.Map(builder);
 
             builder.ToTable(nameof(FileEntity));
+            
+            builder.HasIndex(x => x.Slug);
 
             builder.HasIndex(x => x.Hash);
         }
