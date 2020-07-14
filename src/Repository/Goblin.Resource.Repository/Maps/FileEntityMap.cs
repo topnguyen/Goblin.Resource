@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Goblin.Resource.Repository.Maps
 {
-    public class FileGoblinEntityMap : GoblinEntityMap<FileEntity>
+    public class FileEntityMap : GoblinEntityMap<FileEntity>
     {
         public override void Map(EntityTypeBuilder<FileEntity> builder)
         {

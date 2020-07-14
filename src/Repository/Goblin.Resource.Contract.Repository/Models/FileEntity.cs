@@ -14,8 +14,6 @@ namespace Goblin.Resource.Contract.Repository.Models
 
         public long ContentLength { get; set; }
         
-        // Hash to prevent duplicate
-        
         public string Hash { get; set; }
 
         // Image

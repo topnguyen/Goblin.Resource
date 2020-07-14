@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using Elect.DI.Attributes;
 using Goblin.Resource.Contract.Repository.Interfaces;
 using Goblin.Resource.Contract.Service;
@@ -34,22 +33,9 @@ namespace Goblin.Resource.Service
 
             FileServiceHelper.Correct(model);
 
-            // File Checksum
-            
-            var fileHash = SecurityHelper.EncryptSha256(model.ContentBase64);
+            var fileEntity = model.MapTo<FileEntity>();
 
-            var fileEntity = _fileRepo.Get(x => x.Hash == fileHash).FirstOrDefault();
-
-            // Return if Found in Database
-            
-            if (fileEntity != null)
-            {
-                return fileEntity.MapTo<GoblinResourceFileModel>();
-            }
-            
-            fileEntity = model.MapTo<FileEntity>();
-
-            fileEntity.Hash = fileHash;
+            fileEntity.Hash = SecurityHelper.EncryptSha256(model.ContentBase64);
             
             var fileBytes = Convert.FromBase64String(model.ContentBase64);
 
