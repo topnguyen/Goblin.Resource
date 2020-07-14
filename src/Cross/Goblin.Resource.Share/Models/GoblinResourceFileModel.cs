@@ -13,9 +13,7 @@ namespace Goblin.Resource.Share.Models
         public string MimeType { get; set; }
 
         public long ContentLength { get; set; }
-        
-        // Hash to prevent duplicate
-        
+
         public string Hash { get; set; }
 
         // Image
