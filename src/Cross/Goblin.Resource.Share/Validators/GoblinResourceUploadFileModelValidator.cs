@@ -18,7 +18,7 @@ namespace Goblin.Resource.Share.Validators
             
             RuleFor(x => x.ImageMaxHeightPx)
                 .Must(x => !x.HasValue ||  x <= 1440)
-                .WithMessage($"Maximum Image Width is 1440px");
+                .WithMessage($"Maximum Image Height is 1440px");
         }
     }
 }

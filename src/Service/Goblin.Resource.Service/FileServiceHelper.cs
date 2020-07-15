@@ -143,16 +143,20 @@ namespace Goblin.Resource.Service
         
         public static string GenerateFileName(string originalFileName, ImageModel imageModel)
         {
+            originalFileName = originalFileName.ToFriendlySlug();
+            
             var fileName = GenerateId();
 
             if (imageModel != null)
             {
-                fileName += $"-i-c{imageModel.DominantHexColor}-w{imageModel}";
+                fileName += $"-i-{imageModel.DominantHexColor.Trim('#')}-w{imageModel.WidthPx}-h{imageModel.HeightPx}-{originalFileName}";
             }
             else
             {
-                fileName += "-f-c0-w0-h0";
+                fileName += $"-f-c0-w0-h0-{originalFileName}";
             }
+
+            fileName = fileName.ToLowerInvariant();
 
             return fileName;
         }
